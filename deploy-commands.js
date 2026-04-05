@@ -1,4 +1,4 @@
-require('dotenv').config();
+import 'dotenv/config';
 import { REST, Routes } from 'discord.js';
 
 const commands = [
