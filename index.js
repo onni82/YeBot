@@ -1,19 +1,19 @@
 import 'dotenv/config';
-const { Client, GatewayIntentBits } = require('discord.js');
+import { Client, Events, GatewayIntentBits } from 'discord.js';
 
 const client = new Client({
-    intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent]
+    intents: [GatewayIntentBits.Guilds]
 });
 
-client.once('ready', () =>{
-    console.log(`Logged in as ${client.user.tag}`);
+client.on(Events.ClientReady, readyClient =>{
+    console.log(`Logged in as ${readyClient.user.tag}`);
 });
 
-client.on('messageCreate', message => {
-    if (message.author.bot) return;
+client.on(Events.InteractionCreate, async interaction => {
+    if (!interaction.isChatInputCommand()) return;
 
-    if (message.content.toLowerCase() === '!ping') {
-        message.channel.send('Pong!');
+    if (interaction.commandName === 'ping') {
+        await interaction.reply('Pong!');
     }
 });
 
