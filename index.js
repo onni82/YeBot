@@ -63,7 +63,7 @@ client.on(Events.InteractionCreate, async interaction => {
     if (interaction.commandName === 'kanye_says') {
         const topic = interaction.options.getString('topic', true);
         const line = generateKanyeStyleLine(topic);
-        await interaction.reply(line);
+        await interaction.reply(`"${line}"\n- Maybe Kanye West`);
     }
 });
 
