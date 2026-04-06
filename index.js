@@ -17,9 +17,10 @@ async function loadJsonArray(fileUrl, label) {
     return parsedContents;
 }
 
-const [kanyeIntros, kanyeClosers] = await Promise.all([
+const [kanyeIntros, kanyeClosers, kanyeMiddles] = await Promise.all([
     loadJsonArray(new URL('./data/kanye-intros.json', import.meta.url), 'Intros'),
-    loadJsonArray(new URL('./data/kanye-closers.json', import.meta.url), 'Closers')
+    loadJsonArray(new URL('./data/kanye-closers.json', import.meta.url), 'Closers'),
+    loadJsonArray(new URL('./data/kanye-middles.json', import.meta.url), 'Middles')
 ]);
 
 async function fetchKanyeQuote() {
@@ -48,8 +49,9 @@ function pickRandomItem(items) {
 
 function generateKanyeStyleLine(topic) {
     const intro = pickRandomItem(kanyeIntros);
+    const middle = pickRandomItem(kanyeMiddles);
     const closer = pickRandomItem(kanyeClosers);
-    return `${intro} ${topic} is not a trend, ${closer}`;
+    return `${intro} ${topic} ${middle}, ${closer}`;
 }
 
 client.on(Events.ClientReady, readyClient =>{
