@@ -56,14 +56,14 @@ client.on(Events.InteractionCreate, async interaction => {
 
     if (interaction.commandName === 'kanye') {
         const quote = await fetchKanyeQuote();
-        await interaction.reply(`"${quote}"\n- Kanye West`);
+        await interaction.reply(`"${quote}"\n- Kanye`);
         return;
     }
 
     if (interaction.commandName === 'kanye_says') {
         const topic = interaction.options.getString('topic', true);
         const line = generateKanyeStyleLine(topic);
-        await interaction.reply(`"${line}"\n- Maybe Kanye West`);
+        await interaction.reply(`"${line}"\n- Something Kanye could have said`);
     }
 });
 
