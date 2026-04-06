@@ -3,8 +3,20 @@ import { REST, Routes } from 'discord.js';
 
 const commands = [
     {
-        name: 'ping',
-        description: 'Replies with Pong!',
+        name: 'kanye',
+        description: 'Get a random Kanye quote.',
+    },
+    {
+        name: 'kanye_says',
+        description: 'Ask Kanye to respond to your topic.',
+        options: [
+            {
+                name: 'topic',
+                description: 'What should Kanye talk about?',
+                type: 3,
+                required: true,
+            },
+        ],
     },
 ];
 

@@ -1,5 +1,12 @@
 # Discord Bot Setup
 
+This project is a Kanye-themed Discord slash-command bot.
+
+Available commands:
+
+- `/kanye` -> Sends a random Kanye quote from the Kanye REST API.
+- `/kanye_says topic:<text>` -> Sends a Kanye-style one-liner about your topic.
+
 This bot requires a `.env` file in the project root with the following values:
 
 ```env
@@ -58,3 +65,8 @@ node index.js
 ```
 
 If the token and client ID are correct, your bot should log in successfully.
+
+## Example usage
+
+- `/kanye`
+- `/kanye_says topic:my new album`
