@@ -1,4 +1,4 @@
-# Discord Bot Setup
+# YeBot Setup
 
 This project is a Kanye-themed Discord slash-command bot.
 
