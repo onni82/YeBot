@@ -61,7 +61,15 @@ node deploy-commands.js
 ## 7. Run the bot
 
 ```bash
-node index.js
+npm run dev
+```
+
+This starts the bot with `nodemon`, so it restarts automatically whenever you change your JavaScript files.
+
+If you want to run it without watching for changes, use:
+
+```bash
+npm start
 ```
 
 If the token and client ID are correct, your bot should log in successfully.
