@@ -1,9 +1,26 @@
 import 'dotenv/config';
 import { Client, Events, GatewayIntentBits } from 'discord.js';
+import { readFile } from 'node:fs/promises';
 
 const client = new Client({
     intents: [GatewayIntentBits.Guilds]
 });
+
+async function loadJsonArray(fileUrl, label) {
+    const rawContents = await readFile(fileUrl, 'utf8');
+    const parsedContents = JSON.parse(rawContents);
+
+    if (!Array.isArray(parsedContents) || parsedContents.length === 0) {
+        throw new Error(`${label} file must contain a non-empty JSON array.`);
+    }
+
+    return parsedContents;
+}
+
+const [kanyeIntros, kanyeClosers] = await Promise.all([
+    loadJsonArray(new URL('./data/kanye-intros.json', import.meta.url), 'Intros'),
+    loadJsonArray(new URL('./data/kanye-closers.json', import.meta.url), 'Closers')
+]);
 
 async function fetchKanyeQuote() {
     try {
@@ -25,25 +42,13 @@ async function fetchKanyeQuote() {
     }
 }
 
+function pickRandomItem(items) {
+    return items[Math.floor(Math.random() * items.length)];
+}
+
 function generateKanyeStyleLine(topic) {
-    const intros = [
-        'Listen,',
-        'Real talk,',
-        'Let me be clear,',
-        'I am not here to play,',
-        'This is visionary-level thinking:'
-    ];
-
-    const closers = [
-        'that is future energy.',
-        'that is bigger than culture.',
-        'that is next-level creativity.',
-        'that is icon behavior.',
-        'that is God-level confidence.'
-    ];
-
-    const intro = intros[Math.floor(Math.random() * intros.length)];
-    const closer = closers[Math.floor(Math.random() * closers.length)];
+    const intro = pickRandomItem(kanyeIntros);
+    const closer = pickRandomItem(kanyeClosers);
     return `${intro} ${topic} is not a trend, ${closer}`;
 }
 
